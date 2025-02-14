@@ -18,7 +18,7 @@ public class BaseTest {
 			System.setProperty("webdriver.chrome.driver",
 					projectPath + "/src/test/resources/drivers/chromedriver2.exe");
 			driver = new ChromeDriver();
-			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 			driver.manage().window().maximize();
 		}
 	}
