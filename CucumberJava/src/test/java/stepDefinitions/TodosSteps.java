@@ -20,28 +20,28 @@ public class TodosSteps {
     }
 
 	@Given("user is on (.*) application")
-	public void user_is_on_todo_page(String appName) {
+	public void todoManagement(String appName) {
 	Assert.assertEquals("driver.getTitle()",appName);
 	}
 
 	@When("^user add a new Todo item - (.*)$")
-	public void user_addNewTodo(String task) throws InterruptedException {
+	public void addNewTodo(String task) throws InterruptedException {
 		todoPage.enterTask(task);
 	}
 
 	@When("^user complete the Todo item - (.*)$")
-	public void user_completeTodo(String task) throws InterruptedException {
+	public void completeTask(String task) throws InterruptedException {
 		todoPage.completeTask(task);
 	}
 
 	@When("^user deletes the Todo item - (.*)$")
-	public void user_deleteTodo(String task) {
+	public void deleteTodo(String task) {
 		todoPage.deleteTask(task);
 		System.out.println("To do item deleted");
 	}
 
 	@And("^user clicks on (.*) filter$")
-	public void user_clicks_on_filter(String filter) {
+	public void selectFilter(String filter) {
 		if (filter.equalsIgnoreCase("All")) {
 			todoPage.clickAll();
 		} else if (filter.equalsIgnoreCase("Active")) {
@@ -53,22 +53,22 @@ public class TodosSteps {
 	}
 
 	@Then("^user should see the task (.*) in the todo list$")
-	public void user_should_see_in_the_todo_list(String task) {
+	public void verifyTodoList(String task) {
 		Assert.assertTrue(todoPage.isTaskPresent(task));
 	}
 
 	@Then("^user should see the task (.*) marked as completed")
-	public void user_should_see_todo_completed(String task) {
+	public void verifyCompletedTasks(String task) {
 		Assert.assertTrue(todoPage.isTaskCompleted(task));
 	}
 
 	@Then("^user should not see the task (.*) marked as deleted")
-	public void user_should_see_todo_deleted(String task) {
+	public void verifyDeletedTasks(String task) {
 		Assert.assertTrue(todoPage.isTaskDeleted(task));
 	}
 	
 	@When("^user edit the task (.*) to (.*)$")
-	public void user_edit_the_task(String oldTask, String newTask)
+	public void editTask(String oldTask, String newTask)
 	{
 		todoPage.editTask(oldTask, newTask);
 	}
