@@ -5,7 +5,7 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/resources/Features/TodoManagement.feature",
+@CucumberOptions(features = "src/test/resources/features/TodoManagement.feature",
         glue = {"stepDefinitions", "base"},
         monochrome = true,
         plugin = {"pretty", "json:target/cucumber.json", "html:target/cucumber-reports.html"})

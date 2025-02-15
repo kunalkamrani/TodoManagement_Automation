@@ -5,6 +5,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/CucumberJava/pom.xml" />
+        <option value="$PROJECT_DIR$/TodoManagement/pom.xml" />
       </list>
     </option>
   </component>

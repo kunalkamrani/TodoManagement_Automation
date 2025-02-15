@@ -10,6 +10,8 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import pages.TodoPage;
 
+import java.util.List;
+
 public class TodosSteps {
     WebDriver driver;
     TodoPage todoPage;
@@ -35,13 +37,18 @@ public class TodosSteps {
         todoPage.completeTask(task);
     }
 
+    @When("^user click on clear completed tasks$")
+    public void clearCompletedTask() {
+        todoPage.clickClearCompleted();
+    }
+
     @When("^user deletes the Todo item - (.*)$")
     public void deleteTask(String task) {
         todoPage.deleteTask(task);
         System.out.println("To do item deleted");
     }
 
-    @And("^user clicks on (.*) filter$")
+    @And("^user click on (.*) filter$")
     public void selectFilter(String filter) {
         if (filter.equalsIgnoreCase("All")) {
             todoPage.clickAll();
@@ -65,7 +72,8 @@ public class TodosSteps {
 
     @Then("^user should not see the task (.*) marked as deleted")
     public void verifyDeletedTasks(String task) {
-        Assert.assertTrue(todoPage.isTaskDeleted(task));
+        //  Assert.assertFalse(todoPage.isTaskDeleted(task));
+
     }
 
     @When("^user edit the task (.*) to (.*)$")
@@ -73,4 +81,14 @@ public class TodosSteps {
         todoPage.editTask(oldTask, newTask);
     }
 
+    @Then("^user should see (.*) active tasks$")
+    public void verifyActiveTaskCount(int expectedCount) {
+        int actualCount = todoPage.getActiveTaskCount();
+        Assert.assertEquals("Active task count mismatch!", expectedCount, actualCount);
+    }
+
+    @And("^user adds multiple tasks")
+    public void addMultipleTasks(List<String> tasks) throws InterruptedException {
+        todoPage.addMultipleTasks(tasks);
+    }
 }

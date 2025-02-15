@@ -1,6 +1,7 @@
 package pages;
 
 import objectRepository.TodoPageLocators;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -94,10 +95,27 @@ public class TodoPage {
     }
 
     public void editTask(String oldTask, String newTask) {
-        WebElement task = driver.findElement(TodoPageLocators.getTaskByName(oldTask));
-        Actions actions = new Actions(driver);
-        actions.doubleClick(task).perform();
-        task.clear();
-        task.sendKeys(newTask + "\n");
+        for(WebElement task : getAllTasks()){
+            if (task.getText().equalsIgnoreCase(oldTask))
+            {
+                Actions actions = new Actions(driver);
+                actions.doubleClick(task).perform();
+                WebElement editInput = task.findElement(By.xpath("//input"));
+                editInput.clear();
+                editInput.sendKeys(newTask + "\n");
+            }
+        }
+
+    }
+
+    public int getActiveTaskCount() {
+        return Integer.parseInt(driver.findElement(TodoPageLocators.lbl_activeCounts).getText().split(" ")[0]);
+    }
+
+    public void addMultipleTasks(List<String> tasks) throws InterruptedException {
+        for (String task : tasks) {
+            enterTask(task);
+        }
     }
 }
+
