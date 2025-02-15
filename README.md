@@ -29,7 +29,7 @@ mvn -version
 git clone <repository-url>
 ````
 ````
-cd todomvc-automation
+cd TodoManagement_Automation
 ````
 
 ### 2. Configure Test Execution Settings
@@ -48,7 +48,7 @@ mvn test
 ````
 Option 2: Run Specific Feature
 ````
-mvn test -Dcucumber.options="src/test/resources/features/addTodo.feature"
+mvn test -Dcucumber.options="src/test/resources/features/TodoManagement.feature"
 ````
 
 

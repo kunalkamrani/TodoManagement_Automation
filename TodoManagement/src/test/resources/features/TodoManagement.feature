@@ -40,7 +40,7 @@ Feature: Todo Management in todoMVC
 
   Scenario Outline: Apply completed filter
     And user add a new Todo item - <taskName>
-    And user add a new Todo item - 'Go to Gym'
+    And user add a new Todo item - Go to Gym
     And user complete the Todo item - <taskName>
     When user clicks on 'Completed' filter
     Then user should see the task <taskName> marked as completed
