@@ -12,7 +12,7 @@ public class TodoPageLocators {
     public static By btn_active = By.xpath("//a[text()='Active']");
     public static By btn_completed = By.xpath("//a[text()='Completed']");
     public static By btn_clearCompleted = By.xpath("//button[text()='Clear completed']");
-    public static By lbl_activeCounts= By.xpath("//*[@class='todo-count']");
+    public static By lbl_activeCounts = By.xpath("//*[@class='todo-count']");
 
     // Dynamic
     public static By getTaskByName(String taskName) {

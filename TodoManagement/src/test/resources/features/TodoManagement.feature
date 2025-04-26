@@ -53,7 +53,6 @@ Feature: Todo Management in todoMVC
     Then user should see the task <taskName> marked as completed
     And user should see <taskCount> active tasks
 
-
     Examples:
       | taskName    | taskCount |
       | Read a Book | 1         |

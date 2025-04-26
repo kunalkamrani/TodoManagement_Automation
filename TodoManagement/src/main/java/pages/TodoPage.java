@@ -95,9 +95,8 @@ public class TodoPage {
     }
 
     public void editTask(String oldTask, String newTask) {
-        for(WebElement task : getAllTasks()){
-            if (task.getText().equalsIgnoreCase(oldTask))
-            {
+        for (WebElement task : getAllTasks()) {
+            if (task.getText().equalsIgnoreCase(oldTask)) {
                 Actions actions = new Actions(driver);
                 actions.doubleClick(task).perform();
                 WebElement editInput = task.findElement(By.xpath("//input"));

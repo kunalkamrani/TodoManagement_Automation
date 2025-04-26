@@ -1,14 +1,18 @@
 package runners;
 
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
-import org.junit.runner.RunWith;
 
-@RunWith(Cucumber.class)
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
+
 @CucumberOptions(features = "src/test/resources/features/TodoManagement.feature",
         glue = {"stepDefinitions", "base"},
         monochrome = true,
-        plugin = {"pretty", "json:target/cucumber.json", "html:target/cucumber-reports.html"})
-public class TestRunner {
+//        plugin = {"pretty", "json:target/cucumber.json", "html:target/cucumber-reports.html"}
+        plugin = {
+                "pretty",
+                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"}
+)
+
+public class TestRunner extends AbstractTestNGCucumberTests {
 
 }
