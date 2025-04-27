@@ -5,8 +5,10 @@ import io.cucumber.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import utils.ConfigReader;
 
 import java.time.Duration;
@@ -29,7 +31,9 @@ public class BaseTest {
         switch (browser) {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--headless");
+                driver = new ChromeDriver(chromeOptions);
                 break;
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
@@ -37,7 +41,9 @@ public class BaseTest {
                 break;
             case "safari":
                 WebDriverManager.safaridriver().setup();
-                driver = new SafariDriver();
+                SafariOptions safariOptions = new SafariOptions();
+                safariOptions.setCapability("--headless",true);
+                driver = new SafariDriver(safariOptions);
 
 
                 break;
