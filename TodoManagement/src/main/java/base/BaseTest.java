@@ -2,16 +2,25 @@ package base;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 import utils.ConfigReader;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 
 public class BaseTest {
 
@@ -37,6 +46,8 @@ public class BaseTest {
                 break;
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                firefoxOptions.addArguments("--headless");
                 driver = new FirefoxDriver();
                 break;
             case "safari":
@@ -55,11 +66,30 @@ public class BaseTest {
 
     }
 
+
     @After
-    public void teardown() {
-        if (driver != null) {
-            driver.quit();
-            driver = null;
+    public void teardown(Scenario scenario) {
+        if (scenario.isFailed()) {
+            takeScreenshot(driver, scenario.getName());
+        }
+            if (driver != null) {
+
+                driver.quit();
+                driver = null;
+            }
+
+    }
+    public static void takeScreenshot(WebDriver driver, String scenarioName) {
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        File src = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+        String path = "screenshots/" +scenarioName + "_" + timestamp + ".png";
+        File destination = new File(path);
+        try {
+            FileUtils.copyFile(src, destination);
+            System.out.println("Saved Screenshot" + destination);
+        } catch (IOException e) {
+            System.out.println("Capture Failed " + e.getMessage());
         }
     }
+
 }

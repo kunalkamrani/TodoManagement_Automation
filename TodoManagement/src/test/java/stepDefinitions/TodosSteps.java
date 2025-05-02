@@ -84,7 +84,7 @@ public class TodosSteps {
     @Then("^user should see (.*) active tasks$")
     public void verifyActiveTaskCount(int expectedCount) {
         int actualCount = todoPage.getActiveTaskCount();
-      //  Assert.assertEquals("Active task count mismatch!", expectedCount, actualCount);
+        Assert.assertEquals(expectedCount, actualCount);
     }
 
     @And("^user adds multiple tasks")
