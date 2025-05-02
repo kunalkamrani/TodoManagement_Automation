@@ -20,7 +20,7 @@ Feature: Todo Management in todoMVC
 
     Examples:
       | taskName    | taskCount |
-      | Read a Book | 1         |
+      | Read a Book | 0         |
 
   Scenario Outline: Delete a Todo
     And user adds multiple tasks
